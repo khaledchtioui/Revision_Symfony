@@ -47,7 +47,7 @@ class ClassroomController extends AbstractController
            $em=$doctrine->getManager() ;
            $em->persist($Classroom);
            $em->flush();
-           return $this->redirectToRoute("addClassroom")   ;
+           return $this->redirectToRoute("listClassroom")   ;
        }
 
         return $this->renderForm("Classroom/add.html.twig",array("formulairecla"=>$form))  ;
@@ -71,6 +71,17 @@ class ClassroomController extends AbstractController
 
         return $this->renderForm("Classroom/update.html.twig",array("formulairecla"=>$form))  ;
 
+
+
+    }
+    #[Route('/DeleteClassroom/{id}', name: 'deleteClassroom')]
+    public function DeleteClassroom($id,ClassroomRepository $repo,ManagerRegistry $doctrine)
+    {
+        $Classroom=$repo->find($id) ;
+        $em=$doctrine->getManager() ;
+        $em->remove($Classroom);
+        $em->flush();
+        return $this->redirectToRoute("listClassroom");
 
 
     }
