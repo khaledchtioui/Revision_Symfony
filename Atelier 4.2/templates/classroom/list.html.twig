@@ -1,0 +1,26 @@
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Update</td>
+        <td>Delete</td>
+
+    </tr>
+
+
+{% for f in tabClassroom %}
+    <tr>
+        <td>{{ f.getId() }}</td>
+        <td>{{ f.name }}</td>
+        <td> <a href="{{ path('updateClassroom',{'id':f.getId()}) }}">Modifier</a> </td>
+        <td> <a href="{{ path('deleteClassroom',{'id':f.getId()}) }}">Delete</a> </td>
+
+    </tr>
+
+
+{% endfor %}
+
+</table>
+<a href="{{ path('list_student') }}">Student</a>
+
+<h1><a href="{{ path('addClassroom') }}">Ajouter</a></h1>
