@@ -1,0 +1,42 @@
+<h1>La liste des formations de la classe {{ v1 }} dans la salle {{ v2 }}</h1>
+{% if  tab is empty%}
+<h1>Tableau vide</h1>
+{% else %}
+<table border="1">
+
+<tr>
+    <td>Ref</td>
+    <td>Titre</td>
+    <td>Description</td>
+    <td>N_P</td>
+    <td>Participer</td>
+</tr>
+    {% set somme,max,maxpart=0,0,"" %}
+
+    {% for f in tab %}
+
+        {% set somme=somme+f.nb_participants%}
+        {% if f.nb_participants >=max%}
+        {% set max=f.nb_participants %}
+        {% set maxpart=f.Titre %}
+        {% endif %}
+
+
+        {% if f.Description =="formation theorique" %}
+    <tr>
+        <td>{{ f.ref }}</td>
+        <td>{{ f.Titre|upper }}</td>
+        <td>{{ f.Description }}</td>
+        <td>{{ f.nb_participants }}</td>
+        <td>
+                <a href="{{ path('app_name',{'nom':f.Titre}) }}">Participer</a>
+        </td>
+    </tr>
+        {% endif %}
+    {% endfor %}
+
+</table>
+{% endif %}
+<h3 style="color: coral">Nb de formation = {{ tab|length }}</h3>
+<h3 style="color: #671ece">la formation ayant le plus grand nombre de participants. : {{ maxpart }} avec nombre egale à : {{ max }}</h3>
+<h3 style="color: crimson">Total des participants : {{ somme }}</h3>
